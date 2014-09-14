@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Alexander Maslov"]
   spec.email         = ["drakmail@delta.pm"]
   spec.summary       = %q{Yandex money API for ruby.}
-  spec.homepage      = "http://github.com/drakmail/yandex-money-ruby"
+  spec.homepage      = "https://github.com/yandex-money/yandex-money-sdk-ruby"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")

@@ -8,15 +8,15 @@ Simple gem for Yandex Money usage.
 
 ## Example application
 
-You could find small example application in [sample](https://github.com/drakmail/yandex-money-ruby/tree/master/sample) directory.
+You could find small example application in [sample](https://github.com/yandex-money/yandex-money-sdk-ruby/tree/master/sample) directory.
 
 ### Running example application
 
 Fetch source code and install dependencies
 
 ```
-  git clone git@github.com:drakmail/yandex-money-ruby.git
-  cd yandex-money-ruby/sample
+  git clone git@github.com:yandex-money/yandex-money-sdk-ruby.git
+  cd yandex-money-sdk-ruby/sample
   bundle install
 ```
 
@@ -277,7 +277,7 @@ This library is very unstable. Pull requests welcome!
 
 ## Contributing
 
-1. Fork it ( https://github.com/drakmail/yandex-money-ruby/fork )
+1. Fork it ( https://github.com/yandex-money/yandex-money-sdk-ruby/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Write tests with rspec + VCR
 4. Write code
