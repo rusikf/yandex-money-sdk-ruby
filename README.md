@@ -3,6 +3,7 @@
 [![Build Status](https://travis-ci.org/yandex-money/yandex-money-sdk-ruby.svg)](https://travis-ci.org/yandex-money/yandex-money-sdk-ruby)
 [![Coverage Status](https://img.shields.io/coveralls/yandex-money/yandex-money-sdk-ruby.svg)](https://coveralls.io/r/yandex-money/yandex-money-sdk-ruby)
 [![Code Climate](https://codeclimate.com/github/yandex-money/yandex-money-sdk-ruby/badges/gpa.svg)](https://codeclimate.com/github/yandex-money/yandex-money-sdk-ruby)
+[![Gem Version](https://badge.fury.io/rb/yandex-money-sdk.svg)](http://badge.fury.io/rb/yandex-money-sdk)
 
 Ruby gem for Yandex Money API usage.
 
