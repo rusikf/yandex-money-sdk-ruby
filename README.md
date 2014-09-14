@@ -54,13 +54,6 @@ Or install it manually with:
     redirect_uri: REDIRECT_URI,
     scope: "account-info operation-history"
   )
-  # If TOKEN is need to be obtained and client_secret key is set
-  api = YandexMoney::Api.new(
-    client_id: CLIENT_ID,
-    redirect_uri: REDIRECT_URI,
-    scope: "account-info operation-history",
-    client_secret: "ACBECEBCB21411...123BCE"
-  )
 ```
 
 ### Use user browser to send auth request to Yandex.Money server
@@ -74,6 +67,13 @@ To get token use `YandexMoney::Api#obtain_token`:
 ```ruby
   api.code = "ACEB6F56EC46B66F280AFB9C805C61A66A8B5" # obtained code
   token = api.obtain_token # token contains valid client token
+```
+
+If `client_secret` is set:
+
+```ruby
+  api.code = "ACEB6F56EC46B66F280AFB9C805C61A66A8B5" # obtained code
+  token = api.obtain_token(CLIENT_SECRET) # token contains valid client token
 ```
 
 ## Methods

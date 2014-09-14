@@ -21,48 +21,30 @@ module YandexMoney
         @client_id = options[:client_id]
         @redirect_uri = options[:redirect_uri]
         @instance_id = options[:instance_id]
-        @client_secret = options[:client_secret]
         if options[:scope] != nil
-          if @client_secret
-            @client_url = send_authorize_request(
-              "client_id" => @client_id,
-              "response_type" => "code",
-              "redirect_uri" => @redirect_uri,
-              "scope" => options[:scope],
-              "client_secret" => @client_secret
-            )
-          else
-            @client_url = send_authorize_request(
-              "client_id" => @client_id,
-              "response_type" => "code",
-              "redirect_uri" => @redirect_uri,
-              "scope" => options[:scope]
-            )
-          end
+          @client_url = send_authorize_request(
+            client_id: @client_id,
+            response_type: "code",
+            redirect_uri: @redirect_uri,
+            scope: options[:scope]
+          )
         end
       end
     end
 
     # obtains and saves token from code
-    def obtain_token
+    def obtain_token(client_secret = nil)
       raise "Authorization code not provided" if code == nil
       uri = "/oauth/token"
-      if @client_secret
-        @token = self.class.post(uri, body: {
-          code: @code,
-          client_id: @client_id,
-          grant_type: "authorization_code",
-          redirect_uri: @redirect_url,
-          client_secret: @client_secret
-        }).parsed_response["access_token"]
-      else
-        @token = self.class.post(uri, body: {
-          code: @code,
-          client_id: @client_id,
-          grant_type: "authorization_code",
-          redirect_uri: @redirect_url
-        }).parsed_response["access_token"]
-      end
+      options = {
+        code: @code,
+        client_id: @client_id,
+        grant_type: "authorization_code",
+        redirect_uri: @redirect_url
+      }
+      options[:client_secret] = client_secret if client_secret
+      @token = self.class.post(uri, body: options)
+                         .parsed_response["access_token"]
     end
 
     # obtains account info
