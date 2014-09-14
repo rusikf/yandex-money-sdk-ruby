@@ -4,7 +4,7 @@
 [![Coverage Status](https://img.shields.io/coveralls/yandex-money/yandex-money-sdk-ruby.svg)](https://coveralls.io/r/yandex-money/yandex-money-sdk-ruby)
 [![Code Climate](https://codeclimate.com/github/yandex-money/yandex-money-sdk-ruby/badges/gpa.svg)](https://codeclimate.com/github/yandex-money/yandex-money-sdk-ruby)
 
-Simple gem for Yandex Money usage.
+Ruby gem for Yandex Money API usage.
 
 ## Example application
 
@@ -15,7 +15,7 @@ You could find small example application in [yandex-money/yandex-money-sdk-ruby-
 Add this line to your application's Gemfile:
 
 ```ruby
-  gem 'yandex-money-ruby'
+  gem 'yandex-money-api'
 ```
 
 And then execute:
@@ -27,7 +27,7 @@ And then execute:
 Or install it manually with:
 
 ```
-  gem install yandex-money-ruby
+  gem install yandex-money-api
 ```
 
 ## Usage
