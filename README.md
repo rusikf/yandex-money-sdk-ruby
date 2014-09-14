@@ -15,7 +15,7 @@ You could find small example application in [yandex-money/yandex-money-sdk-ruby-
 Add this line to your application's Gemfile:
 
 ```ruby
-  gem 'yandex-money'
+  gem 'yandex-money-sdk'
 ```
 
 And then execute:
@@ -27,7 +27,7 @@ And then execute:
 Or install it manually with:
 
 ```
-  gem install yandex-money
+  gem install yandex-money-sdk
 ```
 
 ## Usage

@@ -6,7 +6,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'yandex_money/api/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "yandex-money"
+  spec.name          = "yandex-money-sdk"
   spec.description   = "SDK for Yandex Money API"
   spec.version       = YandexMoney::Api::VERSION
   spec.authors       = ["Alexander Maslov"]
