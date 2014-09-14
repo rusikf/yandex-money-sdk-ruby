@@ -50,26 +50,21 @@ module YandexMoney
     # obtains account info
     def account_info
       check_token
-      send_request("/api/account-info")
+      OpenStruct.new send_request("/api/account-info").parsed_response
     end
 
     # obtains operation history
     def operation_history(options=nil)
       check_token
-      send_request("/api/operation-history", options)
+      OpenStruct.new send_request("/api/operation-history", options).parsed_response
     end
 
     # obtains operation details
     def operation_details(operation_id)
       check_token
       raise "Provide operation_id" if operation_id == nil
-      uri = "/api/operation-details"
-      request = self.class.post(uri, base_uri: "https://money.yandex.ru", headers: {
-        "Authorization" => "Bearer #{@token}",
-        "Content-Type" => "application/x-www-form-urlencoded"
-      }, body: {
-        operation_id: operation_id
-      })
+
+      request = send_request("/api/operation-details", operation_id: operation_id)
 
       raise "Insufficient Scope" if request.response.code == "403"
 
@@ -84,15 +79,10 @@ module YandexMoney
     # basic request payment method
     def request_payment(options)
       check_token
-      uri = "/api/request-payment"
       response = OpenStruct.new with_http_retries {
-        request = self.class.post(uri, base_uri: "https://money.yandex.ru", headers: {
-          "Authorization" => "Bearer #{@token}",
-          "Content-Type" => "application/x-www-form-urlencoded"
-        }, body: options)
-
+        request = send_request("/api/request-payment", options)
         raise "Insufficient Scope" if request.response.code == "403"
-        request.parsed_response
+        OpenStruct.new request.parsed_response
       }
       if response.error
         raise response.error.gsub(/_/, " ").capitalize
@@ -104,14 +94,8 @@ module YandexMoney
     # basic process payment method
     def process_payment(options)
       check_token
-      uri = "/api/process-payment"
-      request = self.class.post(uri, base_uri: "https://money.yandex.ru", headers: {
-        "Authorization" => "Bearer #{@token}",
-        "Content-Type" => "application/x-www-form-urlencoded"
-      }, body: options)
-
+      request = send_request("/api/process-payment", options)
       raise "Insufficient Scope" if request.response.code == "403"
-        
       response = OpenStruct.new request.parsed_response
 
       if response.error
@@ -122,13 +106,7 @@ module YandexMoney
     end
 
     def get_instance_id
-      uri = "/api/instance-id"
-      request = self.class.post(uri, base_uri: "https://money.yandex.ru", headers: {
-        "Content-Type" => "application/x-www-form-urlencoded"
-      }, body: {
-        client_id: @client_id
-      })
-
+      request = send_request("/api/instance-id", client_id: @client_id)
       if request["status"] == "refused"
         raise request["error"].gsub(/_/, " ").capitalize
       else
@@ -146,10 +124,7 @@ module YandexMoney
       else
         request_body = { operation_id: operation_id }
       end
-      request = self.class.post(uri, base_uri: "https://money.yandex.ru", headers: {
-        "Authorization" => "Bearer #{@token}",
-        "Content-Type" => "application/x-www-form-urlencoded"
-      }, body: request_body)
+      request = send_request("/api/incoming-transfer-accept", request_body)
 
       raise "Insufficient Scope" if request.response.code == "403"
       if request["status"] == "refused"
@@ -165,13 +140,7 @@ module YandexMoney
     end
 
     def incoming_transfer_reject(operation_id)
-      uri = "/api/incoming-transfer-reject"
-      request = self.class.post(uri, base_uri: "https://money.yandex.ru", headers: {
-        "Authorization" => "Bearer #{@token}",
-        "Content-Type" => "application/x-www-form-urlencoded"
-      }, body: {
-        operation_id: operation_id
-      })
+      request = send_request("/api/incoming-transfer-reject", operation_id: operation_id)
 
       raise "Insufficient Scope" if request.response.code == "403"
       if request["status"] == "refused"
@@ -183,10 +152,7 @@ module YandexMoney
 
     def request_external_payment(payment_options)
       payment_options[:instance_id] ||= @instance_id
-      uri = "/api/request-external-payment"
-      request = self.class.post(uri, base_uri: "https://money.yandex.ru", headers: {
-        "Content-Type" => "application/x-www-form-urlencoded"
-      }, body: payment_options)
+      request = send_request("/api/request-external-payment", payment_options)
       raise "Insufficient Scope" if request.response.code == "403"
       if request["status"] == "refused"
         raise "#{request["error"].gsub(/_/, " ").capitalize}"
@@ -197,10 +163,8 @@ module YandexMoney
 
     def process_external_payment(payment_options)
       payment_options[:instance_id] ||= @instance_id
-      uri = "/api/process-external-payment"
-      request = self.class.post(uri, base_uri: "https://money.yandex.ru", headers: {
-        "Content-Type" => "application/x-www-form-urlencoded"
-      }, body: payment_options)
+      request = send_request("/api/process-external-payment", payment_options)
+
       raise "Insufficient Scope" if request.response.code == "403"
       if request["status"] == "refused"
         raise "#{request["error"].gsub(/_/, " ").capitalize}"
@@ -214,10 +178,10 @@ module YandexMoney
     private
 
     def send_request(uri, options = nil)
-      OpenStruct.new self.class.post(uri, base_uri: "https://money.yandex.ru", headers: {
+      self.class.post(uri, base_uri: "https://money.yandex.ru", headers: {
         "Authorization" => "Bearer #{@token}",
         "Content-Type" => "application/x-www-form-urlencoded"
-      }, body: options).parsed_response
+      }, body: options)
     end
 
     # Retry when errors
