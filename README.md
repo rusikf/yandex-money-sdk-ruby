@@ -1,4 +1,4 @@
-# YandexMoney Api
+# Yandex Money Ruby SDK Ruby
 
 [![Build Status](https://travis-ci.org/yandex-money/yandex-money-sdk-ruby.svg)](https://travis-ci.org/yandex-money/yandex-money-sdk-ruby)
 [![Coverage Status](https://img.shields.io/coveralls/yandex-money/yandex-money-sdk-ruby.svg)](https://coveralls.io/r/yandex-money/yandex-money-sdk-ruby)
