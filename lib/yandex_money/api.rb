@@ -50,21 +50,13 @@ module YandexMoney
     # obtains account info
     def account_info
       check_token
-      uri = "/api/account-info"
-      OpenStruct.new self.class.post(uri, base_uri: "https://money.yandex.ru", headers: {
-        "Authorization" => "Bearer #{@token}",
-        "Content-Type" => "application/x-www-form-urlencoded"
-      }).parsed_response
+      send_request("/api/account-info")
     end
 
     # obtains operation history
     def operation_history(options=nil)
       check_token
-      uri = "/api/operation-history"
-      OpenStruct.new self.class.post(uri, base_uri: "https://money.yandex.ru", headers: {
-        "Authorization" => "Bearer #{@token}",
-        "Content-Type" => "application/x-www-form-urlencoded"
-      }, body: options).parsed_response
+      send_request("/api/operation-history", options)
     end
 
     # obtains operation details
@@ -220,6 +212,13 @@ module YandexMoney
     end
 
     private
+
+    def send_request(uri, options = nil)
+      OpenStruct.new self.class.post(uri, base_uri: "https://money.yandex.ru", headers: {
+        "Authorization" => "Bearer #{@token}",
+        "Content-Type" => "application/x-www-form-urlencoded"
+      }, body: options).parsed_response
+    end
 
     # Retry when errors
     def with_http_retries(&block)
