@@ -1,8 +1,8 @@
 # YandexMoney Api
 
-[![Build Status](https://travis-ci.org/drakmail/yandex-money-ruby.svg)](https://travis-ci.org/drakmail/yandex-money-ruby)
-[![Coverage Status](https://img.shields.io/coveralls/drakmail/yandex-money-ruby.svg)](https://coveralls.io/r/drakmail/yandex-money-ruby)
-[![Code Climate](https://codeclimate.com/github/drakmail/yandex-money-ruby/badges/gpa.svg)](https://codeclimate.com/github/drakmail/yandex-money-ruby)
+[![Build Status](https://travis-ci.org/yandex-money/yandex-money-sdk-ruby.svg)](https://travis-ci.org/yandex-money/yandex-money-sdk-ruby)
+[![Coverage Status](https://img.shields.io/coveralls/yandex-money/yandex-money-sdk-ruby.svg)](https://coveralls.io/r/yandex-money/yandex-money-sdk-ruby)
+[![Code Climate](https://codeclimate.com/github/yandex-money/yandex-money-sdk-ruby/badges/gpa.svg)](https://codeclimate.com/github/yandex-money/yandex-money-sdk-ruby)
 
 Simple gem for Yandex Money usage.
 
