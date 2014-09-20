@@ -33,7 +33,7 @@ describe "Payments from the Yandex.Money wallet" do
             test_payment: "true",
             test_result: "success"
           )
-        }.to raise_error "Illegal params"
+        }.to raise_error YandexMoney::ApiError
       end
     end
 
@@ -55,7 +55,7 @@ describe "Payments from the Yandex.Money wallet" do
             test_payment: "true",
             test_result: "success"
           )
-        }.to raise_error "Contract not found"
+        }.to raise_error YandexMoney::ApiError
       end
     end
 
@@ -69,7 +69,7 @@ describe "Payments from the Yandex.Money wallet" do
       VCR.use_cassette "accept incoming transfer with protection code with wrong code" do
         expect {
           @api.incoming_transfer_accept("463937921796020004", "6377")
-        }.to raise_error "Illegal param protection code, attemps available: 2"
+        }.to raise_error YandexMoney::AcceptTransferError
       end
     end
 
@@ -83,7 +83,7 @@ describe "Payments from the Yandex.Money wallet" do
       VCR.use_cassette "reject payment fail" do
         expect {
           @api.incoming_transfer_reject("")
-        }.to raise_error "Illegal param operation id"
+        }.to raise_error YandexMoney::ApiError
       end
     end
   end

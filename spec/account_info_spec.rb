@@ -45,9 +45,18 @@ describe "get account info" do
       end
     end
 
+    it "raise unauthorized exception when wrong token" do
+      VCR.use_cassette "unauthorized exception" do
+        @api = YandexMoney::Api.new(
+          token: "wrong"
+        )
+        expect { @api.operation_details "462449992116028008" }.to raise_error YandexMoney::UnauthorizedError
+      end
+    end
+
     it "should raise exception if operation_id is wrong" do
       VCR.use_cassette "get wrong operation details" do
-        expect { @api.operation_details "unknown" }.to raise_error "Illegal param operation id"
+        expect { @api.operation_details "unknown" }.to raise_error YandexMoney::ApiError
       end
     end
   end

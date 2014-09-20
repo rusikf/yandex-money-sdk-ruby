@@ -54,4 +54,9 @@ describe "Application authorization flow" do
       expect(api.account_info.account).to eq("41001565326286")
     end
   end
+
+  it "should raise exception while trying to obtain token without code" do
+    api = YandexMoney::Api.new(client_id: CLIENT_ID)
+    expect { api.obtain_token }.to raise_error YandexMoney::FieldNotSetError
+  end
 end

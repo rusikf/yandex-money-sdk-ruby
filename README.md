@@ -99,6 +99,7 @@ Required permissions: `operation-history`.
 ```ruby
   api.operation_history
   #<OpenStruct next_record="30", operations=[{"operation_id"=>"462449992116028008", "title"=>"Возврат средств от:", "amount"=>1.0, "direction"=>"in", "datetime"=>"2014-08-27T10:19:52Z", "status"=>"success", "type"=>"deposition"}, ..., {"pattern_id"=>"p2p", "operation_id"=>"460970888534110007", "title"=>"Перевод на счет 410011700000000", "amount"=>3.02, "direction"=>"out", "datetime"=>"2014-08-10T07:28:15Z", "status"=>"success", "type"=>"outgoing-transfer"}]>
+
   # you could pass params:
   api.operation_history(records: 1)
   #<OpenStruct next_record="1", operations=[{"pattern_id"=>"p2p", "operation_id"=>"463947376678019004", "title"=>"Перевод от 410011285000000", "amount"=>0.99, "direction"=>"in", "datetime"=>"2014-09-13T18:16:16Z", "status"=>"refused", "type"=>"incoming-transfer-protected"}]>
@@ -119,8 +120,8 @@ If operation doesn't exist, exception will be raised:
 
 ```ruby
   api.operation_details "unknown"
-  #   RuntimeError:
-  #     Illegal param operation id
+  #  YandexMoney::ApiError:
+  #    Illegal param operation id
 ```
 
 If scope is insufficient, expcetion will be raised:
@@ -128,8 +129,8 @@ If scope is insufficient, expcetion will be raised:
 ```ruby
   api = YandexMoney::Api.new(token: TOKEN)
   api.operation_details(OPERATION_ID)
-  #  RuntimeError:
-  #     Insufficient Scope
+  #  YandexMoney::InsufficientScopeError:
+  #     YandexMoney::InsufficientScopeError
 ```
 
 ### Payments from the Yandex.Money wallet
@@ -183,7 +184,7 @@ Required token permissions: `incoming-transfers`.
   api.incoming_transfer_accept "463937708331015004", "0208"
   # true
   api.incoming_transfer_accept "463937708331015004", "WRONG"
-  #  RuntimeError:
+  #  YandexMoney::ApiError:
   #     Illegal param protection code, attemps available: 2
 ```
 
@@ -198,7 +199,7 @@ Required token permissions: `incoming-transfers`.
   api.incoming_transfer_reject "463947376678019004"
   # true
   api.incoming_transfer_reject ""
-  #  RuntimeError:
+  #  YandexMoney::ApiError:
   #     Illegal param operation id
 ```
 
@@ -250,7 +251,7 @@ The recommended retry mode is determined by the `next_retry` response field (by 
 
 ## Running tests
 
-Just run `rake`.
+Just run it with `rake` command.
 
 ## Caveats
 

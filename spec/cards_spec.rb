@@ -10,7 +10,7 @@ describe "Payments from bank cards without authorization" do
       @api = YandexMoney::Api.new(
         client_id: nil
       )
-      expect { @api.get_instance_id }.to raise_exception("Illegal param client id")
+      expect { @api.get_instance_id }.to raise_error YandexMoney::ApiError
     end
   end
 
