@@ -79,11 +79,11 @@ module YandexMoney
     # basic request payment method
     def request_payment(options)
       check_token
-      response = OpenStruct.new with_http_retries {
+      response = with_http_retries do
         request = send_request("/api/request-payment", options)
         raise "Insufficient Scope" if request.response.code == "403"
         OpenStruct.new request.parsed_response
-      }
+      end
       if response.error
         raise response.error.gsub(/_/, " ").capitalize
       else
