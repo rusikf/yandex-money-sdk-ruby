@@ -248,6 +248,10 @@ The recommended retry mode is determined by the `next_retry` response field (by 
   #<OpenStruct status="ext_auth_required", acs_params={"cps_context_id"=>"31323039373...93134623165", "paymentType"=>"FC"}, acs_uri="https://m.sp-money.yandex.ru/internal/public-api/to-payment-type">
 ```
 
+## Running tests
+
+Just run `rake`.
+
 ## Caveats
 
 This library is very unstable. Pull requests welcome!
