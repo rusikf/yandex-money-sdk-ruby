@@ -74,29 +74,12 @@ module YandexMoney
 
     # basic request payment method
     def request_payment(options)
-      check_token
-      response = with_http_retries do
-        request = send_request("/api/request-payment", options)
-        OpenStruct.new request.parsed_response
-      end
-      if response.error
-        raise YandexMoney::ApiError.new response.error
-      else
-        response
-      end
+      send_payment_request("/api/request-payment", options)
     end
 
     # basic process payment method
     def process_payment(options)
-      check_token
-      request = send_request("/api/process-payment", options)
-      response = OpenStruct.new request.parsed_response
-
-      if response.error
-        raise YandexMoney::ApiError.new response.error
-      else
-        response
-      end
+      send_payment_request("/api/process-payment", options)
     end
 
     def get_instance_id
@@ -150,7 +133,6 @@ module YandexMoney
     def process_external_payment(payment_options)
       payment_options[:instance_id] ||= @instance_id
       request = send_request("/api/process-external-payment", payment_options)
-
       if request["status"] == "refused"
         raise YandexMoney::ApiError.new request["error"]
       elsif request["status"] == "in_progress"
@@ -175,13 +157,14 @@ module YandexMoney
       end
     end
 
-    # Retry when errors
-    def with_http_retries(&block)
-      begin
-        yield
-      rescue Errno::ECONNREFUSED, SocketError, Net::ReadTimeout
-        sleep 1
-        retry
+    def send_payment_request(uri, options)
+      check_token
+      request = send_request(uri, options)
+      response = OpenStruct.new request.parsed_response
+      if response.error
+        raise YandexMoney::ApiError.new response.error
+      else
+        response
       end
     end
 

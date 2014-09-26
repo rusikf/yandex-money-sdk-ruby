@@ -1,3 +1,7 @@
+# 0.11.0 (September 26, 2014)
+
+Disable handling of HTTP errors inside gem in `process_payment` method.
+
 # 0.10.0 (September 20, 2014)
 
 Exceptions now is divided by classes, now it lives in `lib/yandex_money/exceptions.rb` for details.
