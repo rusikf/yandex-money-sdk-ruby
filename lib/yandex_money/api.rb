@@ -33,7 +33,6 @@ module YandexMoney
           )
         end
       end
-      @logger.info "test TEST"
     end
 
     # obtains and saves token from code
