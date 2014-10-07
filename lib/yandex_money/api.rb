@@ -1,5 +1,6 @@
 require "yandex_money/api/version"
 require "yandex_money/exceptions"
+require "yandex_money/logger/default"
 require "httparty"
 require "uri"
 require "ostruct"
@@ -16,6 +17,7 @@ module YandexMoney
     # Returns url to get token
     def initialize(options)
       # TOKEN provided
+      @logger = options[:logger] || YandexMoney::Logger::Default.new(STDOUT)
       if options.length == 1 && options[:token] != nil
         @token = options[:token]
       else
@@ -31,6 +33,7 @@ module YandexMoney
           )
         end
       end
+      @logger.info "test TEST"
     end
 
     # obtains and saves token from code

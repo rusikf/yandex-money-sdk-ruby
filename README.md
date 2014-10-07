@@ -22,27 +22,27 @@ Supported ruby versions: 1.9.3, 2.0, 2.1, jruby, rbx-2
 
 Add this line to your Gemfile:
 
-    ```ruby
-    gem 'yandex-money-sdk'
-    ```
+```ruby
+  gem 'yandex-money-sdk'
+```
 
 And then execute:
 
-    ```
-    bundle
-    ```
+```
+  bundle
+```
 
 Or install it manually with:
 
-    ```
-    gem install yandex-money-sdk
-    ```
+```
+  gem install yandex-money-sdk
+```
 
 Next, require it in application:
 
-    ```ruby
-    require 'yandex_money/api'
-    ```
+```ruby
+  require 'yandex_money/api'
+```
 
 
 ### Payments from the Yandex.Money wallet
