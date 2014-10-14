@@ -1,6 +1,7 @@
 require "yandex_money/api/version"
 require "yandex_money/exceptions"
 require "yandex_money/logger/default"
+require "yandex_money/logger/empty"
 require "httparty"
 require "uri"
 require "ostruct"
@@ -17,7 +18,7 @@ module YandexMoney
     # Returns url to get token
     def initialize(options)
       # TOKEN provided
-      @logger = options[:logger] || YandexMoney::Logger::Default.new(STDOUT)
+      @logger = options[:logger] || YandexMoney::Logger::Empty.new(STDOUT)
       if options.length == 1 && options[:token] != nil
         @token = options[:token]
       else
@@ -46,8 +47,9 @@ module YandexMoney
         redirect_uri: @redirect_url
       }
       options[:client_secret] = client_secret if client_secret
-      @token = self.class.post(uri, body: options)
-                         .parsed_response["access_token"]
+      @logger.info("url: https://sp-money.yandex.ru#{uri}, params: #{URI.encode_www_form options}")
+      response = self.class.post(uri, body: options).parsed_response
+      @token = response["access_token"]
     end
 
     # obtains account info
@@ -147,10 +149,12 @@ module YandexMoney
     private
 
     def send_request(uri, options = nil)
+      @logger.info("url: https://money.yandex.ru#{uri}, bearer: #{@logger.mask_token(@token)}, params: #{URI.encode_www_form options || {}}")
       request = self.class.post(uri, base_uri: "https://money.yandex.ru", headers: {
         "Authorization" => "Bearer #{@token}",
         "Content-Type" => "application/x-www-form-urlencoded"
       }, body: options)
+      @logger.info("response: #{request.response.body}")
 
       case request.response.code
       when "403" then raise YandexMoney::InsufficientScopeError
@@ -176,6 +180,7 @@ module YandexMoney
 
     def send_authorize_request(options)
       uri = "/oauth/authorize"
+      @logger.info("url: https://money.yandex.ru#{uri}, params: #{URI.encode_www_form options || {}}")
       self.class.post(uri, body: options).request.path.to_s
     end
   end

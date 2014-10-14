@@ -3,8 +3,6 @@ require "logger"
 module YandexMoney
   module Logger
     class Default < ::Logger
-
-      private
       # if token exists, then extract first 8 symbols
       # and last 8 symbols, and join it with ".."
       def mask_token(token)
