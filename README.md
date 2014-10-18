@@ -23,7 +23,7 @@ Supported ruby versions: 1.9.3, 2.0, 2.1, jruby, rbx-2
 Add this line to your Gemfile:
 
 ```ruby
-gem 'yandex-money-sdk'
+gem 'yandex-money-sdk', require: false
 ```
 
 And then execute:
