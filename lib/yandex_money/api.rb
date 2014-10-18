@@ -49,6 +49,7 @@ module YandexMoney
       options[:client_secret] = client_secret if client_secret
       @logger.info("url: https://sp-money.yandex.ru#{uri}, params: #{URI.encode_www_form options}")
       response = self.class.post(uri, body: options).parsed_response
+      raise YandexMoney::ApiError.new response["error"] if response["error"]
       @token = response["access_token"]
     end
 
