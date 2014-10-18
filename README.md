@@ -79,6 +79,9 @@ when [register](https://sp-money.yandex.ru/myservices/new.xml) app in Yandex.Mon
     # access_token = api.obtain_token(CLIENT_SECRET)
     ```
 
+If `access_token` couldn't be obtained, `YandexMoney::ApiError` expection will be raised.
+
+
 4. Now you can use Yandex.Money API.
 
     ```ruby
