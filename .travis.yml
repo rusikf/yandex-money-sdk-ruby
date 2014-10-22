@@ -9,5 +9,3 @@ matrix:
     - rvm: jruby-19mode
     - rvm: rbx-2
   fast_finish: true
-branches:
-  only: master
