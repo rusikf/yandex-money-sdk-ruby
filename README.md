@@ -54,12 +54,11 @@ Note: `client_id`, `redirect_uri`, `client_secret` are constants that you get,
 when [register](https://sp-money.yandex.ru/myservices/new.xml) app in Yandex.Money API.
 
     ```ruby
-    api = YandexMoney::Api.new(
-      client_id: CLIENT_ID,
-      redirect_uri: REDIRECT_URI,
-      scope: "account-info operation-history"
+    auth_url = YandexMoney::Wallet.build_obtain_token_url(
+      CLIENT_ID,
+      REDIRECT_URI,
+      "account-info operation-history" # SCOPE
     )
-    auth_url = api.client_url
     ```
 
 2. After that, user fills Yandex.Money HTML form and user is redirected back to
@@ -68,15 +67,20 @@ when [register](https://sp-money.yandex.ru/myservices/new.xml) app in Yandex.Mon
 3. You should immediately exchange `CODE` with `ACCESS_TOKEN`.
 
     ```ruby
-    api = YandexMoney::Api.new(
-      client_id: CLIENT_ID,
-      redirect_uri: REDIRECT_URI,
-      scope: "account-info operation-history"
+    access_token = YandexMoney::Wallet.get_access_token(
+      CLIENT_ID,
+      CODE,
+      REDIRECT_URI,
+      "account-info operation-history" # SCOPE
     )
-    api.code = params[:code] # obtained code
-    access_token = api.obtain_token
     # or, if client secret defined:
-    # access_token = api.obtain_token(CLIENT_SECRET)
+    access_token = YandexMoney::Wallet.get_access_token(
+      CLIENT_ID,
+      CODE,
+      REDIRECT_URI,
+      "account-info operation-history", # SCOPE
+      CLIENT_SECRET
+    )
     ```
 
     If `access_token` couldn't be obtained, `YandexMoney::ApiError` expection will be raised.
@@ -85,7 +89,7 @@ when [register](https://sp-money.yandex.ru/myservices/new.xml) app in Yandex.Mon
 4. Now you can use Yandex.Money API.
 
     ```ruby
-    api = YandexMoney::Api.new(token: TOKEN) # TOKEN is obtained token
+    api = YandexMoney::Wallet.new(token: TOKEN) # TOKEN is obtained token
     account_info = api.account_info
     balance = account_info.balance # and so on
 
@@ -119,22 +123,13 @@ when [register](https://sp-money.yandex.ru/myservices/new.xml) app in Yandex.Mon
 result in DB).
 
     ```ruby
-    api = YandexMoney::Api.new(client_id: CLIENT_ID)
-    response = api.get_instance_id # returns string, contains instance id
-    if reponse.status == "success"
-      instance_id = response.instance_id
-    else
-      # throw exception
-    end
+    instance_id = YandexMoney::ExternalPayment.get_instance_id(CLIENT_ID)
     ```
 
 2. Make request payment
 
     ```ruby
-    api = YandexMoney::Api.new(
-      client_id: CLIENT_ID,
-      instance_id: INSTANCE_ID
-    )
+    api = YandexMoney::ExternalPayment.new(INSTANCE_ID)
     response = api.request_external_payment({
       pattern_id: "p2p",
       to: "410011285611534",
@@ -151,7 +146,7 @@ result in DB).
 3. Process the request with process-payment. 
 
     ```ruby
-    api = YandexMoney::Api.new(instance_id: INSTANCE_ID)
+    api = YandexMoney::ExternalPayment.new(INSTANCE_ID)
     result = api.process_external_payment({
       request_id: REQUEST_ID,
       ext_auth_success_uri: "http://example.com/success",
@@ -163,4 +158,4 @@ result in DB).
 
 ## Running tests
 
-Just run it with `bundle exec rake` command.
+Fill values in `spec/support/constants.rb` file (example could be found in `spec/support/constants.example.rb`) and after this just run tests with `bundle exec rake` command.

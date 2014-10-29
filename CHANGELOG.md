@@ -1,3 +1,7 @@
+# 1.0.0pre (October 29, 2014)
+
+Totally new API (like in other implementations), temporally removed logger, removed `spec/support/constants` from git (for travis now it encrypted).
+
 # 0.11.0 (October 14, 2014)
 
 Disable handling of HTTP errors inside gem in `process_payment` method.

@@ -22,3 +22,4 @@ tmp
 mkmf.log
 .DS_Store
 *.swp
+spec/support/constants.rb

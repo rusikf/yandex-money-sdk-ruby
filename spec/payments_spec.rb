@@ -3,9 +3,7 @@ require "spec_helper"
 describe "Payments from the Yandex.Money wallet" do
   describe "make payment to an account" do
     before :all do
-      @api = YandexMoney::Api.new(
-        token: "41001565326286.F231B646B62994F492C42942769B28211D996082FB0E553BF7D8783D91D6A2FF8CB9C83EA2E7A6A1DC303369916D25A8B60F63E52F6C19784F3F703B54332655CF59964ADFEF6D188F74E912617D7B0954A7BDEF83A683C09DAB35BC189785C3A1E6D0D7168F980875A67962C6119E87A18442E600F0ADB431DD1BCF33C905D3"
-      )
+      @api = YandexMoney::Wallet.new(ACCESS_TOKEN)
     end
 
     it "success request payment" do

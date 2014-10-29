@@ -8,7 +8,7 @@ http_interactions:
       string: ''
     headers:
       Authorization:
-      - Bearer 41001565326286.B93F917A6E44078B5FA04B7089BC213BE925EC52FB06B3E4EC4B2BFD91C8B2DAB75B552224D3B56C59EE3F7FFD0BB9EF3E14D9221F34EFFF2B0D378532A041F230338D28272A574671AB2639761126E2F587F02077005354F906C9A79FEFED6CBB3D5E3EB0DC90B2B6D029837D744613978DDE8AA42F5916BBE524B752E89E20
+      - Bearer 410011285611534.7D71D6BF951E91B03E1149CE4AD8A71982AE11E0E5BA27D00595B2B06695C5BAD94DEFB965C8CA4997E903B47F875E4996504CEAEE85C9C8C305A5EF0521478E5D30CD43137680D5759A8BC3DFBBB19F5A124F4ED4E2DFBB4D89A716AAC966163A3A67CC0971B98FE8472DE912C6FD7F6B5A54BA533A627FD99D01852EA5DF25
       Content-Type:
       - application/x-www-form-urlencoded
   response:
@@ -19,11 +19,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Sun, 14 Sep 2014 18:49:12 GMT
+      - Wed, 29 Oct 2014 09:01:24 GMT
       Content-Type:
       - application/json;charset=UTF-8
       Content-Length:
-      - '281'
+      - '131'
       Connection:
       - keep-alive
       Keep-Alive:
@@ -34,7 +34,7 @@ http_interactions:
       - no-cache
     body:
       encoding: UTF-8
-      string: '{"account":"41001565326286","balance":8.91,"currency":"643","avatar":{"ts":"2012-05-02T17:22:59.000+04:00","url":"https://avatars.yandex.net/get-yamoney-profile/yamoney-profile-56809635-2/normal?1335964979000"},"identified":false,"account_type":"personal","account_status":"named"}'
+      string: '{"account":"410011285611534","balance":0.99,"currency":"643","account_type":"personal","identified":false,"account_status":"named"}'
     http_version: 
-  recorded_at: Sun, 14 Sep 2014 18:49:12 GMT
+  recorded_at: Wed, 29 Oct 2014 09:01:25 GMT
 recorded_with: VCR 2.9.3

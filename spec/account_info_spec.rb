@@ -3,13 +3,7 @@ require "spec_helper"
 describe "get account info" do
   before :all do
     VCR.use_cassette "obtain token for get account info" do
-      @api = YandexMoney::Api.new(
-        client_id: CLIENT_ID,
-        redirect_uri: REDIRECT_URI,
-        scope: "account-info operation-history operation-details"
-      )
-      @api.code = "39041180F6631E2B56DD0058F75A34C7504226178A45D624313495ECD417DCC3AA6CBF1B010E65BB09F3F9EB5AE63452129BAE2B732B7457C33BE6B2039B7B60A8058D2A387729A601DC817BBFB27CB0CC2D65E3C70997D981AC0E31F18CF32C0675DFD461E2F5C5639B75AC0E5074CE64FCF4546447BBDC566E3459FB1B3C3B"
-      @api.obtain_token
+      @api = YandexMoney::Wallet.new(ACCESS_TOKEN)
     end
   end
 
@@ -17,7 +11,7 @@ describe "get account info" do
   it "should return account info" do
     VCR.use_cassette "get account info" do
       info = @api.account_info
-      expect(info.account).to eq("41001565326286")
+      expect(info.account).to eq WALLET_NUMBER
     end
   end
 
@@ -25,7 +19,7 @@ describe "get account info" do
   it "should return operation history" do
     VCR.use_cassette "get operation history" do
       history = @api.operation_history
-      expect(history.operations.count).to eq 30
+      expect(history.operations.count).to be_between(1, 30).inclusive
     end
   end
 
@@ -40,16 +34,14 @@ describe "get account info" do
   describe "operation details" do
     it "should return valid operation details" do
       VCR.use_cassette "get operation details" do
-        details = @api.operation_details "462449992116028008"
+        details = @api.operation_details OPERATION_ID
         expect(details.status).to eq "success"
       end
     end
 
     it "raise unauthorized exception when wrong token" do
       VCR.use_cassette "unauthorized exception" do
-        @api = YandexMoney::Api.new(
-          token: "wrong"
-        )
+        @api = YandexMoney::Wallet.new("wrong_token")
         expect { @api.operation_details "462449992116028008" }.to raise_error YandexMoney::UnauthorizedError
       end
     end
