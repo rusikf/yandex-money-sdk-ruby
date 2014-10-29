@@ -1,13 +1,16 @@
 language: ruby
-script: "rake"
+script: rake
 rvm:
-  - 1.9.3
-  - 2.0.0
-  - 2.1.0
+- 1.9.3
+- 2.0.0
+- 2.1.0
 matrix:
   include:
-    - rvm: jruby-19mode
-    - rvm: rbx-2
+  - rvm: jruby-19mode
+  - rvm: rbx-2
   fast_finish: true
 branches:
   only: master
+before_install:
+- openssl aes-256-cbc -K $encrypted_b75809a34a66_key -iv $encrypted_b75809a34a66_iv
+  -in constants.rb.enc -out spec/support/constants.rb -d
