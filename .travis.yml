@@ -1,7 +1,7 @@
 language: ruby
 install:
   - rvm @global do gem uninstall bundler -x && gem install bundler -v '~> 1.7.4'
-script: "rake"
+script: "bundle exec rake"
 rvm:
   - 1.9.3
   - 2.0.0
