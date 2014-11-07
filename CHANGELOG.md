@@ -1,3 +1,7 @@
+# 1.0.1pre (November 7, 2014)
+
+Change OpenStruct to RecursiveOpenStruct in all responses.
+
 # 1.0.0pre (October 29, 2014)
 
 Totally new API (like in other implementations), temporally removed logger, removed `spec/support/constants` from git (for travis now it encrypted).

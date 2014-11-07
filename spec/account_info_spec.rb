@@ -7,6 +7,13 @@ describe "get account info" do
     end
   end
 
+  it "should return recursive open struct" do
+    VCR.use_cassette "get account info" do
+      info = @api.account_info
+      expect(info.avatar.url).to start_with "https://avatars.yandex.net/"
+    end
+  end
+
   # http://api.yandex.ru/money/doc/dg/reference/account-info.xml
   it "should return account info" do
     VCR.use_cassette "get account info" do

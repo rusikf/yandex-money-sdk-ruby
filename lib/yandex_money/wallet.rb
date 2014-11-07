@@ -1,4 +1,5 @@
 require "httparty"
+require "recursive-open-struct"
 
 module YandexMoney
   # Payments from YandexMoney wallet
@@ -15,18 +16,18 @@ module YandexMoney
 
     # obtains account info
     def account_info
-      OpenStruct.new send_request("/api/account-info").parsed_response
+      RecursiveOpenStruct.new send_request("/api/account-info").parsed_response
     end
 
     # obtains operation history
     def operation_history(options=nil)
-      OpenStruct.new send_request("/api/operation-history", options).parsed_response
+      RecursiveOpenStruct.new send_request("/api/operation-history", options).parsed_response
     end
 
     # obtains operation details
     def operation_details(operation_id)
       request = send_request("/api/operation-details", operation_id: operation_id)
-      details = OpenStruct.new request.parsed_response
+      details = RecursiveOpenStruct.new request.parsed_response
       if details.error
         raise YandexMoney::ApiError.new details.error
       else
@@ -114,7 +115,7 @@ module YandexMoney
 
     def send_payment_request(uri, options)
       request = send_request(uri, options)
-      response = OpenStruct.new request.parsed_response
+      response = RecursiveOpenStruct.new request.parsed_response
       if response.error
         raise YandexMoney::ApiError.new response.error
       else

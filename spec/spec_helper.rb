@@ -12,6 +12,9 @@ VCR.configure do |c|
   c.hook_into :webmock
 end
 
+IGNORED = %w(
+  ./spec/support/constants.example.rb
+)
 RSpec.configure do |config|
-  Dir["./spec/support/**/*.rb"].each {|f| require f}
+  (Dir["./spec/support/**/*.rb"] - IGNORED).each {|f| require f}
 end

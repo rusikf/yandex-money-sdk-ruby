@@ -20,7 +20,7 @@ module YandexMoney
       if request["status"] == "refused"
         raise YandexMoney::ApiError.new request["error"]
       else
-        OpenStruct.new request.parsed_response
+        RecursiveOpenStruct.new request.parsed_response
       end
     end
 
@@ -32,7 +32,7 @@ module YandexMoney
       elsif request["status"] == "in_progress"
         raise YandexMoney::ExternalPaymentProgressError.new request["error"], request["next_retry"]
       else
-        OpenStruct.new request.parsed_response
+        RecursiveOpenStruct.new request.parsed_response
       end
     end
 
