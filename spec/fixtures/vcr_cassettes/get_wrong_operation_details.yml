@@ -8,7 +8,7 @@ http_interactions:
       string: operation_id=unknown
     headers:
       Authorization:
-      - Bearer 41001565326286.42598500AE42A3672ED59463D02EC424B7CD31B416309A392125FA45E79290F3FCFA2CF178D314A0B396659EEAC938BDF8480229BC55CDFD039E66AFFCF5109B44F306D80B6B88FFEF8E87C2C1199949B5CD43B422BB6C2AD857CB9B0AB0FAF316B864F5870BB19C37B08CAEDDB6642401119F1CE8A1D3C23F54EE145A4933A3
+      - Bearer <ACCESS_TOKEN>
       Content-Type:
       - application/x-www-form-urlencoded
   response:
@@ -19,7 +19,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Sat, 30 Aug 2014 13:15:07 GMT
+      - Sun, 09 Nov 2014 23:18:10 GMT
       Content-Type:
       - application/json;charset=UTF-8
       Content-Length:
@@ -36,5 +36,5 @@ http_interactions:
       encoding: UTF-8
       string: '{"error":"illegal_param_operation_id"}'
     http_version: 
-  recorded_at: Sat, 30 Aug 2014 13:15:07 GMT
-recorded_with: VCR 2.6.0
+  recorded_at: Sun, 09 Nov 2014 23:18:10 GMT
+recorded_with: VCR 2.9.3

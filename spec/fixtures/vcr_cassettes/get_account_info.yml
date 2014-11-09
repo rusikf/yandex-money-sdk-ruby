@@ -8,7 +8,7 @@ http_interactions:
       string: ''
     headers:
       Authorization:
-      - Bearer 41001565326286.B93F917A6E44078B5FA04B7089BC213BE925EC52FB06B3E4EC4B2BFD91C8B2DAB75B552224D3B56C59EE3F7FFD0BB9EF3E14D9221F34EFFF2B0D378532A041F230338D28272A574671AB2639761126E2F587F02077005354F906C9A79FEFED6CBB3D5E3EB0DC90B2B6D029837D744613978DDE8AA42F5916BBE524B752E89E20
+      - Bearer <ACCESS_TOKEN>
       Content-Type:
       - application/x-www-form-urlencoded
   response:
@@ -19,7 +19,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Thu, 06 Nov 2014 21:41:52 GMT
+      - Sun, 09 Nov 2014 23:14:11 GMT
       Content-Type:
       - application/json;charset=UTF-8
       Content-Length:
@@ -34,7 +34,7 @@ http_interactions:
       - no-cache
     body:
       encoding: UTF-8
-      string: '{"account":"41001565326286","balance":6.88,"currency":"643","avatar":{"ts":"2012-05-02T17:22:59.000+04:00","url":"https://avatars.yandex.net/get-yamoney-profile/yamoney-profile-56809635-2/normal?1335964979000"},"identified":false,"account_type":"personal","account_status":"named"}'
+      string: '{"account":"<WALLET_NUMBER>","balance":6.88,"currency":"643","avatar":{"ts":"2012-05-02T17:22:59.000+04:00","url":"https://avatars.yandex.net/get-yamoney-profile/yamoney-profile-56809635-2/normal?1335964979000"},"account_type":"personal","identified":false,"account_status":"named"}'
     http_version: 
-  recorded_at: Thu, 06 Nov 2014 21:41:51 GMT
+  recorded_at: Sun, 09 Nov 2014 23:14:11 GMT
 recorded_with: VCR 2.9.3

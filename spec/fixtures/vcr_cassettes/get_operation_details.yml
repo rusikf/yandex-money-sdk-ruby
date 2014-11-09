@@ -5,10 +5,10 @@ http_interactions:
     uri: https://money.yandex.ru/api/operation-details
     body:
       encoding: UTF-8
-      string: operation_id=463937565373019004
+      string: operation_id=<OPERATION_ID>
     headers:
       Authorization:
-      - Bearer 410011285611534.7D71D6BF951E91B03E1149CE4AD8A71982AE11E0E5BA27D00595B2B06695C5BAD94DEFB965C8CA4997E903B47F875E4996504CEAEE85C9C8C305A5EF0521478E5D30CD43137680D5759A8BC3DFBBB19F5A124F4ED4E2DFBB4D89A716AAC966163A3A67CC0971B98FE8472DE912C6FD7F6B5A54BA533A627FD99D01852EA5DF25
+      - Bearer <ACCESS_TOKEN>
       Content-Type:
       - application/x-www-form-urlencoded
   response:
@@ -19,11 +19,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Wed, 29 Oct 2014 09:06:36 GMT
+      - Sun, 09 Nov 2014 23:17:53 GMT
       Content-Type:
       - application/json;charset=UTF-8
       Content-Length:
-      - '362'
+      - '515'
       Connection:
       - keep-alive
       Keep-Alive:
@@ -35,15 +35,18 @@ http_interactions:
     body:
       encoding: ASCII-8BIT
       string: !binary |-
-        eyJwYXR0ZXJuX2lkIjoicDJwIiwib3BlcmF0aW9uX2lkIjoiNDYzOTM3NTY1
-        MzczMDE5MDA0IiwidGl0bGUiOiLQn9C10YDQtdCy0L7QtCDQvtGCIDQxMDAx
-        NTY1MzI2Mjg2IiwiYW1vdW50IjoxLjAwLCJkaXJlY3Rpb24iOiJpbiIsImRh
-        dGV0aW1lIjoiMjAxNC0wOS0xM1QxNTozMjo0NVoiLCJzdGF0dXMiOiJzdWNj
-        ZXNzIiwidHlwZSI6ImluY29taW5nLXRyYW5zZmVyIiwibWVzc2FnZSI6InRl
-        c3QiLCJkZXRhaWxzIjoidGVzdCIsInNlbmRlciI6IjQxMDAxNTY1MzI2Mjg2
-        IiwiY29kZXBybyI6ZmFsc2UsImV4cGlyZXMiOiIyMDE0LTEwLTEzVDE1OjMy
-        OjQ1WiIsImFuc3dlcl9kYXRldGltZSI6IjIwMTQtMDktMTNUMTU6MzQ6MDRa
-        In0=
+        eyJwYXR0ZXJuX2lkIjoicDJwIiwib3BlcmF0aW9uX2lkIjoiPE9QRVJBVElP
+        Tl9JRD4iLCJ0aXRsZSI6ItCf0LXRgNC10LLQvtC0INC90LAg0YHRh9C10YIg
+        NDEwMDExMTYxNjE2ODc3IiwiYW1vdW50IjowLjAzLCJkaXJlY3Rpb24iOiJv
+        dXQiLCJkYXRldGltZSI6IjIwMTQtMTAtMDZUMTk6MTk6MDBaIiwibGFiZWwi
+        OiJ0ZXN0UGF5bWVudCIsInN0YXR1cyI6InN1Y2Nlc3MiLCJ0eXBlIjoib3V0
+        Z29pbmctdHJhbnNmZXIiLCJhbW91bnRfZHVlIjowLjAyLCJmZWUiOjAuMDEs
+        Im1lc3NhZ2UiOiJ0ZXN0IHBheW1lbnQgbWVzc2FnZSBmcm9tIHlhbmRleC1t
+        b25leS1ydWJ5IiwiZGV0YWlscyI6InRlc3QgcGF5bWVudCBtZXNzYWdlIGZy
+        b20geWFuZGV4LW1vbmV5LXJ1YnkiLCJyZWNpcGllbnQiOiI0MTAwMTExNjE2
+        MTY4NzciLCJyZWNpcGllbnRfdHlwZSI6ImFjY291bnQiLCJjb21tZW50Ijoi
+        dGVzdCBwYXltZW50IGNvbW1lbnQgZnJvbSB5YW5kZXgtbW9uZXktcnVieSIs
+        ImNvZGVwcm8iOmZhbHNlfQ==
     http_version: 
-  recorded_at: Wed, 29 Oct 2014 09:06:37 GMT
+  recorded_at: Sun, 09 Nov 2014 23:17:52 GMT
 recorded_with: VCR 2.9.3
