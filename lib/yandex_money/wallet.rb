@@ -7,7 +7,7 @@ module YandexMoney
     include HTTParty
     base_uri "https://money.yandex.ru"
     default_timeout 30
-    
+
     attr_accessor :token
 
     def initialize(token)
@@ -16,12 +16,18 @@ module YandexMoney
 
     # obtains account info
     def account_info
-      RecursiveOpenStruct.new send_request("/api/account-info").parsed_response
+      RecursiveOpenStruct.new send_request("/api/account-info", recurse_over_arrays: true).parsed_response
     end
 
     # obtains operation history
     def operation_history(options=nil)
-      RecursiveOpenStruct.new send_request("/api/operation-history", options).parsed_response
+      history = RecursiveOpenStruct.new(
+        send_request("/api/operation-history", options).parsed_response
+      )
+      history.operations = history.operations.map do |operation|
+        RecursiveOpenStruct.new operation
+      end
+      history
     end
 
     # obtains operation details

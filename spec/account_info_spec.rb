@@ -41,7 +41,9 @@ describe "get account info" do
   describe "operation details" do
     it "should return valid operation details" do
       VCR.use_cassette "get operation details" do
-        details = @api.operation_details OPERATION_ID
+        history = @api.operation_history
+        operation_id = history.operations.first.operation_id
+        details = @api.operation_details operation_id
         expect(details.status).to eq "success"
       end
     end

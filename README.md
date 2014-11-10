@@ -70,15 +70,13 @@ when [register](https://sp-money.yandex.ru/myservices/new.xml) app in Yandex.Mon
     access_token = YandexMoney::Wallet.get_access_token(
       CLIENT_ID,
       CODE,
-      REDIRECT_URI,
-      "account-info operation-history" # SCOPE
+      REDIRECT_URI
     )
     # or, if client secret defined:
     access_token = YandexMoney::Wallet.get_access_token(
       CLIENT_ID,
       CODE,
       REDIRECT_URI,
-      "account-info operation-history", # SCOPE
       CLIENT_SECRET
     )
     ```

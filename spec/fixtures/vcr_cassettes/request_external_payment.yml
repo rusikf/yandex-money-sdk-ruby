@@ -2,13 +2,11 @@
 http_interactions:
 - request:
     method: post
-    uri: https://money.yandex.ru/api/request-external-payment
+    uri: https://money.yandex.ru/api/instance-id
     body:
       encoding: UTF-8
-      string: pattern_id=p2p&instance_id=zRhKWeiQVphBSd6I%2FA8p28R4uRMx9QPPW1nviyTFkQf%2Ba73JuX2jSD0gVEQhWtOH&to=410011285611534&amount_due=1.00&message=test
+      string: client_id=<CLIENT_ID>
     headers:
-      Cookie:
-      - yandexuid=4504946371409241364
       Content-Type:
       - application/x-www-form-urlencoded
   response:
@@ -19,11 +17,46 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Sat, 13 Sep 2014 18:49:54 GMT
+      - Mon, 10 Nov 2014 19:24:27 GMT
       Content-Type:
       - application/json;charset=UTF-8
       Content-Length:
-      - '252'
+      - '101'
+      Connection:
+      - keep-alive
+      Keep-Alive:
+      - timeout=120
+      Vary:
+      - Accept-Encoding
+      Cache-Control:
+      - no-cache
+    body:
+      encoding: UTF-8
+      string: '{"status":"success","instance_id":"6hayxm04FRD5BAcLnbBqeY/ikYmUJKuvYuCCbGqQ5Nd4epIdnhtRmaebGxWqH7jO"}'
+    http_version: 
+  recorded_at: Mon, 10 Nov 2014 19:24:29 GMT
+- request:
+    method: post
+    uri: https://money.yandex.ru/api/request-external-payment
+    body:
+      encoding: UTF-8
+      string: pattern_id=p2p&to=410011285611534&amount_due=1.00&message=test&instance_id=6hayxm04FRD5BAcLnbBqeY%2FikYmUJKuvYuCCbGqQ5Nd4epIdnhtRmaebGxWqH7jO
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Mon, 10 Nov 2014 19:24:27 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '251'
       Connection:
       - keep-alive
       Keep-Alive:
@@ -37,10 +70,10 @@ http_interactions:
       string: !binary |-
         eyJzdGF0dXMiOiJzdWNjZXNzIiwidGl0bGUiOiLQn9C10YDQtdCy0L7QtCDQ
         vdCwINGB0YfQtdGCIDQxMDAxMTI4NTYxMTUzNCIsImNvbnRyYWN0X2Ftb3Vu
-        dCI6NTAuMDAsInJlcXVlc3RfaWQiOiIzMTMyMzAzOTM3MzkzNjMwMzkzNjVm
-        NjQ2NDMxMzM2MzM5NjYzMjYzMzgzNTM1MzAzMDMyMzA2NjM0NjE2MTYzMzAz
-        MDMyMzkzNzMwMzA2NDYxMzI2MTY0MzczOTMxMzQ2MjMxNjUiLCJtb25leV9z
-        b3VyY2UiOnsicGF5bWVudC1jYXJkIjp7fX19
+        dCI6MS4wMiwicmVxdWVzdF9pZCI6IjMxMzMzMDM2MzMzNDM0MzkzMDMwNWY2
+        NjM0MzM2NTY2MzczOTYxMzAzNzYyNjU2NjMwMzUzMTM0NjEzMTM2NjYzNjM3
+        Mzg2MzM1MzMzOTYzMzEzMzY1NjUzMzYyMzQzMzM2NjEzMyIsIm1vbmV5X3Nv
+        dXJjZSI6eyJwYXltZW50LWNhcmQiOnt9fX0=
     http_version: 
-  recorded_at: Sat, 13 Sep 2014 18:49:54 GMT
+  recorded_at: Mon, 10 Nov 2014 19:24:29 GMT
 recorded_with: VCR 2.9.3

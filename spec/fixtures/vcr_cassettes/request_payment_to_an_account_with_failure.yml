@@ -5,12 +5,10 @@ http_interactions:
     uri: https://money.yandex.ru/api/request-payment
     body:
       encoding: UTF-8
-      string: pattern_id=p2p&to=410011285611534&test_payment=true&test_result=success
+      string: pattern_id=p2p&to=410011161616877&test_payment=true&test_result=success
     headers:
-      Cookie:
-      - yandexuid=6270165461409412506
       Authorization:
-      - Bearer 41001565326286.0BB266A33F9F3F6C27B199C98B8FE1F495340C2FC30A80A732D5DE2208E5C51688D71B1284A279C97FF690AC5E991A8809B8733FE126A06A1381EC8A6BB157268DB52B4A2E1E5A39D45BD8F6F4FA7E4D04D3677BF6EFD7350B40E1C0764A17F62CF9CB1A590F7784ABBC760C71CAC7C53D867B3C1D18A1FF38472F0E7ACB2A34
+      - Bearer <ACCESS_TOKEN>
       Content-Type:
       - application/x-www-form-urlencoded
   response:
@@ -21,7 +19,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Sat, 30 Aug 2014 15:53:05 GMT
+      - Mon, 10 Nov 2014 19:24:28 GMT
       Content-Type:
       - application/json;charset=UTF-8
       Content-Length:
@@ -39,5 +37,5 @@ http_interactions:
       string: '{"status":"refused","error":"illegal_params","error_description":"At
         least one parameter of amount or amount_due is expected","test_payment":"true"}'
     http_version: 
-  recorded_at: Sat, 30 Aug 2014 15:53:05 GMT
-recorded_with: VCR 2.6.0
+  recorded_at: Mon, 10 Nov 2014 19:24:30 GMT
+recorded_with: VCR 2.9.3

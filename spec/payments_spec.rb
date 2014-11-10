@@ -10,8 +10,8 @@ describe "Payments from the Yandex.Money wallet" do
       VCR.use_cassette "success request payment to an account" do
         server_response = @api.request_payment(
           pattern_id: "p2p",
-          to: "410011285611534",
-          amount: "1.0",
+          to: "410011161616877",
+          amount: "0.02",
           comment: "test payment comment from yandex-money-ruby",
           message: "test payment message from yandex-money-ruby",
           label: "testPayment",
@@ -27,7 +27,7 @@ describe "Payments from the Yandex.Money wallet" do
         expect {
           @api.request_payment(
             pattern_id: "p2p",
-            to: "410011285611534",
+            to: "410011161616877",
             test_payment: "true",
             test_result: "success"
           )
@@ -63,10 +63,10 @@ describe "Payments from the Yandex.Money wallet" do
       end
     end
 
-    it "raise exception with wrong protection code while accepting incoming transfer" do
+    skip "raise exception with wrong protection code while accepting incoming transfer" do
       VCR.use_cassette "accept incoming transfer with protection code with wrong code" do
         expect {
-          @api.incoming_transfer_accept("463937921796020004", "6377")
+          @api.incoming_transfer_accept("463937921796020004", "WRONG")
         }.to raise_error YandexMoney::AcceptTransferError
       end
     end

@@ -5,7 +5,7 @@ http_interactions:
     uri: https://money.yandex.ru/api/account-info
     body:
       encoding: UTF-8
-      string: ''
+      string: recurse_over_arrays=true
     headers:
       Authorization:
       - Bearer <ACCESS_TOKEN>
@@ -19,7 +19,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Sun, 09 Nov 2014 23:14:11 GMT
+      - Mon, 10 Nov 2014 19:24:25 GMT
       Content-Type:
       - application/json;charset=UTF-8
       Content-Length:
@@ -36,5 +36,5 @@ http_interactions:
       encoding: UTF-8
       string: '{"account":"<WALLET_NUMBER>","balance":6.88,"currency":"643","avatar":{"ts":"2012-05-02T17:22:59.000+04:00","url":"https://avatars.yandex.net/get-yamoney-profile/yamoney-profile-56809635-2/normal?1335964979000"},"account_type":"personal","identified":false,"account_status":"named"}'
     http_version: 
-  recorded_at: Sun, 09 Nov 2014 23:14:11 GMT
+  recorded_at: Mon, 10 Nov 2014 19:24:27 GMT
 recorded_with: VCR 2.9.3

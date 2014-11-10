@@ -1,3 +1,7 @@
+# 1.0.2pre (November 10, 2014)
+
+Big refactoring of specs, they are can run without vcr cassettes with success, small fixes in README, list of operations in operations history now are OpenStruct, not hash.
+
 # 1.0.1pre (November 7, 2014)
 
 Change OpenStruct to RecursiveOpenStruct in all responses.
