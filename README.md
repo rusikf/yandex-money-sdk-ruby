@@ -70,8 +70,7 @@ when [register](https://sp-money.yandex.ru/myservices/new.xml) app in Yandex.Mon
     ```ruby
     api = YandexMoney::Api.new(
       client_id: CLIENT_ID,
-      redirect_uri: REDIRECT_URI,
-      scope: "account-info operation-history"
+      redirect_uri: REDIRECT_URI
     )
     api.code = params[:code] # obtained code
     access_token = api.obtain_token
