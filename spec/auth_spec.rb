@@ -32,4 +32,14 @@ describe "Application authorization flow" do
       expect(api.account_info.account).to eq WALLET_NUMBER
     end
   end
+
+  it "should set default host" do
+    expect(YandexMoney::Wallet.auth_host).to eq "https://sp-money.yandex.ru"
+  end
+
+  it "should set mobile host" do
+    YandexMoney::Wallet.enable_mobile!
+    expect(YandexMoney::Wallet.auth_host).to eq "https://m.sp-money.yandex.ru"
+  end
+
 end

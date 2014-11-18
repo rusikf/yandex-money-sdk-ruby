@@ -61,6 +61,12 @@ when [register](https://sp-money.yandex.ru/myservices/new.xml) app in Yandex.Mon
     )
     ```
 
+    If you want to use mobile authorization server, run this before auth:
+
+      ```ruby
+        YandexMoney::Wallet.enable_mobile!
+      ```
+    
 2. After that, user fills Yandex.Money HTML form and user is redirected back to
 `REDIRECT_URI?code=CODE`.
 

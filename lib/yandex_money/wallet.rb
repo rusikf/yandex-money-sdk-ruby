@@ -79,29 +79,39 @@ module YandexMoney
       end
     end
 
-    def self.build_obtain_token_url(client_id, redirect_uri, scope)
-      uri = "https://sp-money.yandex.ru/oauth/authorize"
-      options = {
-        client_id: client_id,
-        response_type: "code",
-        redirect_uri: redirect_uri,
-        scope: scope
-      }
-      HTTParty.post(uri, body: options).request.path.to_s
-    end
+    class << self
+      def auth_host
+        @auth_host ||= "https://sp-money.yandex.ru"
+      end
 
-    def self.get_access_token(client_id, code, redirect_uri, client_secret=nil)
-      uri = "https://sp-money.yandex.ru/oauth/token"
-      options = {
-        code: code,
-        client_id: client_id,
-        grant_type: "authorization_code",
-        redirect_uri: redirect_uri
-      }
-      options[:client_secret] = client_secret if client_secret
-      response = HTTParty.post(uri, body: options).parsed_response
-      raise YandexMoney::ApiError.new response["error"] if response["error"]
-      response["access_token"]
+      def enable_mobile!
+        @auth_host = "https://m.sp-money.yandex.ru"
+      end
+
+      def build_obtain_token_url(client_id, redirect_uri, scope)
+        uri = "#{auth_host}/oauth/authorize"
+        options = {
+          client_id: client_id,
+          response_type: "code",
+          redirect_uri: redirect_uri,
+          scope: scope
+        }
+        HTTParty.post(uri, body: options).request.path.to_s
+      end
+
+      def get_access_token(client_id, code, redirect_uri, client_secret=nil)
+        uri = "#{auth_host}/oauth/token"
+        options = {
+          code: code,
+          client_id: client_id,
+          grant_type: "authorization_code",
+          redirect_uri: redirect_uri
+        }
+        options[:client_secret] = client_secret if client_secret
+        response = HTTParty.post(uri, body: options).parsed_response
+        raise YandexMoney::ApiError.new response["error"] if response["error"]
+        response["access_token"]
+      end
     end
 
     protected
