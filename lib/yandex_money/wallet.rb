@@ -79,7 +79,7 @@ module YandexMoney
       end
     end
 
-    def self.build_obtain_token_url(client_id, redirect_uri, scope, instance_name=nil)
+    def self.build_obtain_token_url(client_id, redirect_uri, scope, instance_name = nil)
       uri = "https://sp-money.yandex.ru/oauth/authorize"
       options = {
         client_id: client_id,
@@ -91,7 +91,7 @@ module YandexMoney
       HTTParty.post(uri, body: options).request.path.to_s
     end
 
-    def self.get_access_token(client_id, code, redirect_uri, client_secret=nil)
+    def self.get_access_token(client_id, code, redirect_uri, client_secret = nil)
       uri = "https://sp-money.yandex.ru/oauth/token"
       options = {
         code: code,
