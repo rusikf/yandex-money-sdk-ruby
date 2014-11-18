@@ -79,13 +79,14 @@ module YandexMoney
       end
     end
 
-    def self.build_obtain_token_url(client_id, redirect_uri, scope)
+    def self.build_obtain_token_url(client_id, redirect_uri, scope, instance_name=nil)
       uri = "https://sp-money.yandex.ru/oauth/authorize"
       options = {
         client_id: client_id,
         response_type: "code",
         redirect_uri: redirect_uri,
-        scope: scope
+        scope: scope,
+        instance_name: instance_name
       }
       HTTParty.post(uri, body: options).request.path.to_s
     end

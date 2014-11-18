@@ -57,7 +57,8 @@ when [register](https://sp-money.yandex.ru/myservices/new.xml) app in Yandex.Mon
     auth_url = YandexMoney::Wallet.build_obtain_token_url(
       CLIENT_ID,
       REDIRECT_URI,
-      "account-info operation-history" # SCOPE
+      "account-info operation-history", # SCOPE
+      "instance_name" # optional 
     )
     ```
 
