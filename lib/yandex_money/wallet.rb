@@ -79,6 +79,21 @@ module YandexMoney
       end
     end
 
+    def get_aux_token(scope)
+      valid_scopes = ["account-info", "operation-history", "operation-details"]
+      unless valid_scopes.include?(scope)
+        message = "Scope is not valid. Valid values are: #{valid_scopes.join(" ")}"
+        raise YandexMoney::ApiError.new(message)
+      end
+      uri = "/api/token-aux"
+      request_body = {
+        scope: scope
+      }
+      response = send_request(uri, request_body).parsed_response
+      raise YandexMoney::ApiError.new response["error"] if response["error"]
+      response["aux_token"]
+    end
+
     def self.build_obtain_token_url(client_id, redirect_uri, scope)
       uri = "https://sp-money.yandex.ru/oauth/authorize"
       options = {

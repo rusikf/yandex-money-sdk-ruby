@@ -1,0 +1,40 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://money.yandex.ru/api/token-aux
+    body:
+      encoding: UTF-8
+      string: scope=account-info
+    headers:
+      Authorization:
+      - Bearer <ACCESS_TOKEN>
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Wed, 19 Nov 2014 16:49:<OPERATION_ID>9 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '292'
+      Connection:
+      - keep-alive
+      Keep-Alive:
+      - timeout=120
+      Vary:
+      - Accept-Encoding
+      Cache-Control:
+      - no-cache
+    body:
+      encoding: UTF-8
+      string: '{"aux_token":"aux.410011<WALLET_NUMBER>768<OPERATION_ID>7271.<OPERATION_ID>E<WALLET_NUMBER>66126A27928FA44BF091D41<OPERATION_ID>62E<OPERATION_ID>AEC17D87BBB606<OPERATION_ID>E817AED0621<WALLET_NUMBER>2<WALLET_NUMBER>D0F<OPERATION_ID>AFF7D980602D4EAF8F718B<WALLET_NUMBER>0<WALLET_NUMBER>C79A26A68B6A96701E24<OPERATION_ID>9D4<WALLET_NUMBER>E7<WALLET_NUMBER>20BA817C<OPERATION_ID>A9A49A<WALLET_NUMBER>710<WALLET_NUMBER>DD0<WALLET_NUMBER>99B7CD7C40<WALLET_NUMBER>A<WALLET_NUMBER>2ECCFE28CE<OPERATION_ID>01027A2681<WALLET_NUMBER>DF9C1CA90EAF0<WALLET_NUMBER>EA<OPERATION_ID>0A<WALLET_NUMBER><OPERATION_ID>C<OPERATION_ID>1F7<OPERATION_ID>88699A22F14980E8<WALLET_NUMBER><WALLET_NUMBER>E6C2D4<OPERATION_ID>9FAA79CDC0A471D000<OPERATION_ID>B0B6171F0"}'
+    http_version: 
+  recorded_at: Wed, 19 Nov 2014 16:49:59 GMT
+recorded_with: VCR 2.9.3

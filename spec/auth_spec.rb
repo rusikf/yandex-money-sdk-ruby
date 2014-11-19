@@ -32,4 +32,13 @@ describe "Application authorization flow" do
       expect(api.account_info.account).to eq WALLET_NUMBER
     end
   end
+
+  # https://tech.yandex.ru/money/doc/dg/reference/obtain-token-aux-docpage/
+  it "should get auxiliary token" do
+    VCR.use_cassette "initialize with token and get aux_token" do
+      api = YandexMoney::Wallet.new(ACCESS_TOKEN)
+      # it assumes, that you have account-info scope when obtaining access_token
+      expect(api.get_aux_token("account-info")).to start_with("aux.")
+    end
+  end
 end
