@@ -87,7 +87,7 @@ when [register](https://sp-money.yandex.ru/myservices/new.xml) app in Yandex.Mon
 4. Now you can use Yandex.Money API.
 
     ```ruby
-    api = YandexMoney::Wallet.new(token: TOKEN) # TOKEN is obtained token
+    api = YandexMoney::Wallet.new(access_token)
     account_info = api.account_info
     balance = account_info.balance # and so on
 
