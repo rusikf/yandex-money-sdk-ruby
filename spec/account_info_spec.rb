@@ -57,7 +57,7 @@ describe "get account info" do
 
     it "should raise exception if operation_id is wrong" do
       VCR.use_cassette "get wrong operation details" do
-        expect { @api.operation_details "unknown" }.to raise_error YandexMoney::ApiError
+        expect(@api.operation_details("unknown").error).to eq "illegal_param_operation_id"
       end
     end
   end

@@ -16,13 +16,13 @@ describe "Application authorization flow" do
   # http://api.yandex.ru/money/doc/dg/reference/request-access-token.xml
   it "should get token from code" do
     VCR.use_cassette "get token from authorization code" do
-      expect {
+      expect(
         YandexMoney::Wallet.get_access_token(
           CLIENT_ID,
           "SOME CODE",
           REDIRECT_URI
         )
-      }.to raise_error YandexMoney::ApiError
+      ).to be nil
     end
   end
 

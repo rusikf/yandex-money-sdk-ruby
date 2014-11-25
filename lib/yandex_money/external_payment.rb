@@ -7,33 +7,19 @@ module YandexMoney
 
     def self.get_instance_id(client_id)
       request = send_external_payment_request("/api/instance-id", client_id: client_id)
-      if request["status"] == "refused"
-        raise YandexMoney::ApiError.new request["error"]
-      else
-        request["instance_id"]
-      end
+      RecursiveOpenStruct.new request.parsed_response
     end
 
     def request_external_payment(payment_options)
       payment_options[:instance_id] = @instance_id
       request = self.class.send_external_payment_request("/api/request-external-payment", payment_options)
-      if request["status"] == "refused"
-        raise YandexMoney::ApiError.new request["error"]
-      else
-        RecursiveOpenStruct.new request.parsed_response
-      end
+      RecursiveOpenStruct.new request.parsed_response
     end
 
     def process_external_payment(payment_options)
       payment_options[:instance_id] = @instance_id
       request = self.class.send_external_payment_request("/api/process-external-payment", payment_options)
-      if request["status"] == "refused"
-        raise YandexMoney::ApiError.new request["error"]
-      elsif request["status"] == "in_progress"
-        raise YandexMoney::ExternalPaymentProgressError.new request["error"], request["next_retry"]
-      else
-        RecursiveOpenStruct.new request.parsed_response
-      end
+      RecursiveOpenStruct.new request.parsed_response
     end
 
     private
@@ -43,9 +29,12 @@ module YandexMoney
         "Content-Type" => "application/x-www-form-urlencoded"
       }, body: options)
       case request.response.code
-      when "403" then raise YandexMoney::InsufficientScopeError
-      when "401" then raise YandexMoney::UnauthorizedError.new request["www-authenticate"]
-      else request
+      when "400" then raise YandexMoney::InvalidRequestError.new request.response
+      when "401" then raise YandexMoney::UnauthorizedError.new request.response
+      when "403" then raise YandexMoney::InsufficientScopeError request.response
+      when "500" then raise YandexMoney::ServerError
+      else
+        request
       end
     end
 

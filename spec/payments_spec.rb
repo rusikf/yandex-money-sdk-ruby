@@ -24,14 +24,13 @@ describe "Payments from the Yandex.Money wallet" do
 
     it "raise exception without requered params when request payment" do
       VCR.use_cassette "request payment to an account with failure" do
-        expect {
-          @api.request_payment(
-            pattern_id: "p2p",
-            to: "410011161616877",
-            test_payment: "true",
-            test_result: "success"
-          )
-        }.to raise_error YandexMoney::ApiError
+        result = @api.request_payment(
+          pattern_id: "p2p",
+          to: "410011161616877",
+          test_payment: "true",
+          test_result: "success"
+        )
+        expect(result.status).to eq "refused"
       end
     end
 
@@ -48,40 +47,33 @@ describe "Payments from the Yandex.Money wallet" do
 
     it "raise exception without requered params when process payment" do
       VCR.use_cassette "process payment to an account with failure" do
-        expect {
-          @api.process_payment(
+        result = @api.process_payment(
             test_payment: "true",
             test_result: "success"
-          )
-        }.to raise_error YandexMoney::ApiError
+        )
+        expect(result.status).to eq "refused"
       end
     end
 
     it "accept incoming transfer with protection code" do
       VCR.use_cassette "accept incoming transfer with protection code" do
-        expect(@api.incoming_transfer_accept("463937708331015004", "0208")).to be true
-      end
-    end
-
-    skip "raise exception with wrong protection code while accepting incoming transfer" do
-      VCR.use_cassette "accept incoming transfer with protection code with wrong code" do
-        expect {
-          @api.incoming_transfer_accept("463937921796020004", "WRONG")
-        }.to raise_error YandexMoney::AcceptTransferError
+        expect(
+          @api.incoming_transfer_accept("463937708331015004", "0208").status
+        ).to eq "success"
       end
     end
 
     it "can reject payment" do
       VCR.use_cassette "reject payment" do
-        expect(@api.incoming_transfer_reject("463947376678019004")).to be true
+        expect(
+          @api.incoming_transfer_reject("463947376678019004").status
+        ).to eq "success"
       end
     end
 
     it "raise exception when reject wrong payment" do
       VCR.use_cassette "reject payment fail" do
-        expect {
-          @api.incoming_transfer_reject("")
-        }.to raise_error YandexMoney::ApiError
+        expect(@api.incoming_transfer_reject("").status).to eq "refused"
       end
     end
   end

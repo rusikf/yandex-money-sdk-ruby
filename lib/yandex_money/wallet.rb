@@ -33,12 +33,7 @@ module YandexMoney
     # obtains operation details
     def operation_details(operation_id)
       request = send_request("/api/operation-details", operation_id: operation_id)
-      details = RecursiveOpenStruct.new request.parsed_response
-      if details.error
-        raise YandexMoney::ApiError.new details.error
-      else
-        details
-      end
+      RecursiveOpenStruct.new request.parsed_response
     end
 
     # basic request payment method
@@ -61,22 +56,11 @@ module YandexMoney
       else
         request_body = { operation_id: operation_id }
       end
-      request = send_request("/api/incoming-transfer-accept", request_body)
-
-      if request["status"] == "refused"
-        raise YandexMoney::AcceptTransferError.new request["error"], request["protection_code_attempts_available"]
-      else
-        true
-      end
+      RecursiveOpenStruct.new send_request("/api/incoming-transfer-accept", request_body)
     end
 
     def incoming_transfer_reject(operation_id)
-      request = send_request("/api/incoming-transfer-reject", operation_id: operation_id)
-      if request["status"] == "refused"
-        raise YandexMoney::ApiError.new request["error"]
-      else
-        true
-      end
+      RecursiveOpenStruct.new send_request("/api/incoming-transfer-reject", operation_id: operation_id)
     end
 
     def self.build_obtain_token_url(client_id, redirect_uri, scope)
@@ -100,7 +84,6 @@ module YandexMoney
       }
       options[:client_secret] = client_secret if client_secret
       response = HTTParty.post(uri, body: options).parsed_response
-      raise YandexMoney::ApiError.new response["error"] if response["error"]
       response["access_token"]
     end
 
@@ -112,8 +95,10 @@ module YandexMoney
         "Content-Type" => "application/x-www-form-urlencoded"
       }, body: options)
       case request.response.code
-      when "403" then raise YandexMoney::InsufficientScopeError
-      when "401" then raise YandexMoney::UnauthorizedError.new request["www-authenticate"]
+      when "400" then raise YandexMoney::InvalidRequestError.new request.response
+      when "401" then raise YandexMoney::UnauthorizedError.new request.response
+      when "403" then raise YandexMoney::InsufficientScopeError.new request.response
+      when "500" then raise YandexMoney::ServerError
       else
         request
       end
@@ -122,11 +107,7 @@ module YandexMoney
     def send_payment_request(uri, options)
       request = send_request(uri, options)
       response = RecursiveOpenStruct.new request.parsed_response
-      if response.error
-        raise YandexMoney::ApiError.new response.error
-      else
-        response
-      end
+      response
     end
   end
 end

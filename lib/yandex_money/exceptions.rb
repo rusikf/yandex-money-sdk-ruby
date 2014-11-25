@@ -1,17 +1,27 @@
 module YandexMoney
   class Error < StandardError; end
 
-  class InsufficientScopeError < Error; end
-
-  class UnauthorizedError < Error
+  class ErrorWithMessage < Error
     def initialize(error)
       @err = error
     end
 
     def message
-      @err
+      if @err["www-authenticate"]
+        "#{@err.msg} - #{@err["www-authenticate"]}"
+      else
+        @err.msg
+      end
     end
   end
+
+  class InsufficientScopeError < ErrorWithMessage; end
+
+  class InvalidRequestError < ErrorWithMessage; end
+
+  class UnauthorizedError < ErrorWithMessage; end
+
+  class ServerError < Error; end
 
   class FieldNotSetError < Error
     def initialize(field)

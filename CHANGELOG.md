@@ -1,3 +1,7 @@
+# 1.0.3pre (November 25, 2014)
+
+Some API changes - now exceptions raised only for 4xx and 500 error codes, changed returned values.
+
 # 1.0.2pre (November 10, 2014)
 
 Big refactoring of specs, they are can run without vcr cassettes with success, small fixes in README, list of operations in operations history now are OpenStruct, not hash.

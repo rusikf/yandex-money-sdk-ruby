@@ -7,14 +7,17 @@ describe "Payments from bank cards without authorization" do
   end
   it "should fail when try to register an instance of application without connected market" do
     VCR.use_cassette "get instance id fail" do
-      expect { YandexMoney::ExternalPayment.get_instance_id(nil) }.to raise_error YandexMoney::ApiError
+      expect(
+        YandexMoney::ExternalPayment.get_instance_id(nil).status
+      ).to eq "refused"
     end
   end
 
   it "should register an instance of application" do
     VCR.use_cassette "get instance id success" do
       expect(
-        YandexMoney::ExternalPayment.get_instance_id(CLIENT_ID).length
+        YandexMoney::ExternalPayment.get_instance_id(CLIENT_ID)
+                                    .instance_id.length
       ).to eq 64
     end
   end
