@@ -1,3 +1,14 @@
+# 1.0.4pre (December 9, 2014)
+
+Now you could set API url through config:
+
+```
+YandexMoney.configure do |config|
+  config.money_url = "https://money.yandex.ru"
+  config.sp_money_url = "https://sp-money.yandex.ru"
+end
+```
+
 # 1.0.3pre (November 25, 2014)
 
 Some API changes - now exceptions raised only for 4xx and 500 error codes, changed returned values.

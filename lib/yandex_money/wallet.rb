@@ -5,7 +5,7 @@ module YandexMoney
   # Payments from YandexMoney wallet
   class Wallet
     include HTTParty
-    base_uri "https://money.yandex.ru"
+    base_uri YandexMoney.config.money_url
     default_timeout 30
 
     attr_accessor :token
@@ -64,7 +64,7 @@ module YandexMoney
     end
 
     def self.build_obtain_token_url(client_id, redirect_uri, scope)
-      uri = "https://sp-money.yandex.ru/oauth/authorize"
+      uri = "#{YandexMoney.config.sp_money_url}/oauth/authorize"
       options = {
         client_id: client_id,
         response_type: "code",
@@ -75,7 +75,7 @@ module YandexMoney
     end
 
     def self.get_access_token(client_id, code, redirect_uri, client_secret=nil)
-      uri = "https://sp-money.yandex.ru/oauth/token"
+      uri = "#{YandexMoney.config.sp_money_url}/oauth/token"
       options = {
         code: code,
         client_id: client_id,

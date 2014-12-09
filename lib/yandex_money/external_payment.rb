@@ -25,7 +25,7 @@ module YandexMoney
     private
 
     def self.send_external_payment_request(uri, options)
-      request = HTTParty.post(uri, base_uri: "https://money.yandex.ru", headers: {
+      request = HTTParty.post(uri, base_uri: YandexMoney.config.money_url, headers: {
         "Content-Type" => "application/x-www-form-urlencoded"
       }, body: options)
       case request.response.code
