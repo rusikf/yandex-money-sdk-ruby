@@ -1,18 +1,18 @@
 module YandexMoney
   class << self
-    attr_accessor :config
-  end
+    attr_writer :config
 
-  def self.config
-    @config ||= Config.new
-  end
+    def config
+      @config ||= Config.new
+    end
 
-  def self.configure
-    yield(config)
-  end
+    def configure
+      yield(config)
+    end
 
-  def self.reset_config
-    @config = Config.new
+    def reset_config
+      @config = Config.new
+    end
   end
 
   class Config
