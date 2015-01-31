@@ -1,5 +1,8 @@
 module YandexMoney
-  # Payments without auth
+  # Payments from bank cards without authorization
+  #
+  # @see http://api.yandex.com/money/doc/dg/reference/process-external-payments.xml
+  # @see https://tech.yandex.ru/money/doc/dg/reference/process-external-payments-docpage/
   class ExternalPayment
     def initialize(instance_id)
       @instance_id = instance_id
@@ -7,10 +10,14 @@ module YandexMoney
 
     # Registers instance of application
     #
-    # - {http://api.yandex.com/money/doc/dg/reference/instance-id.xml}
-    # - {https://tech.yandex.ru/money/doc/dg/reference/instance-id-docpage/}
+    # @see http://api.yandex.com/money/doc/dg/reference/instance-id.xml
+    # @see https://tech.yandex.ru/money/doc/dg/reference/instance-id-docpage/
     #
     # @param client_id [String] An identifier of application
+    #
+    # @raise [YandexMoney::InvalidRequestError] HTTP request does not conform to protocol format. Unable to parse HTTP request, or the Authorization header is missing or has an invalid value.
+    # @raise [YandexMoney::ServerError] A technical error occurs (the server responds with the HTTP code 500 Internal Server Error). The application should repeat the request with the same parameters later.
+    #
     # @return [RecursiveOpenStruct] A status of operation
     def self.get_instance_id(client_id)
       request = send_external_payment_request("/api/instance-id", client_id: client_id)
@@ -19,10 +26,14 @@ module YandexMoney
 
     # Requests a external payment
     #
-    # - {http://api.yandex.com/money/doc/dg/reference/request-external-payment.xml}
-    # - {https://tech.yandex.ru/money/doc/dg/reference/request-external-payment-docpage/}
+    # @see http://api.yandex.com/money/doc/dg/reference/request-external-payment.xml
+    # @see https://tech.yandex.ru/money/doc/dg/reference/request-external-payment-docpage/
     #
     # @param payment_options [Hash] Method's parameters. Check out docs for more information.
+    #
+    # @raise [YandexMoney::InvalidRequestError] HTTP request does not conform to protocol format. Unable to parse HTTP request, or the Authorization header is missing or has an invalid value.
+    # @raise [YandexMoney::ServerError] A technical error occurs (the server responds with the HTTP code 500 Internal Server Error). The application should repeat the request with the same parameters later.
+    #
     # @return [RecursiveOpenStruct] A struct, containing `payment_id` and additional information about a recipient and payer
     def request_external_payment(payment_options)
       payment_options[:instance_id] = @instance_id
@@ -32,10 +43,14 @@ module YandexMoney
 
     # Confirms a payment that was created using the request-extenral-payment method
     #
-    # - {http://api.yandex.com/money/doc/dg/reference/process-external-payment.xml}
-    # - {https://tech.yandex.ru/money/doc/dg/reference/process-external-payment-docpage/}
+    # @see http://api.yandex.com/money/doc/dg/reference/process-external-payment.xml
+    # @see https://tech.yandex.ru/money/doc/dg/reference/process-external-payment-docpage/
     #
     # @param payment_options [Hash] Method's parameters. Check out docs for more information.
+    #
+    # @raise [YandexMoney::InvalidRequestError] HTTP request does not conform to protocol format. Unable to parse HTTP request, or the Authorization header is missing or has an invalid value.
+    # @raise [YandexMoney::ServerError] A technical error occurs (the server responds with the HTTP code 500 Internal Server Error). The application should repeat the request with the same parameters later.
+    #
     # @return [RecursiveOpenStruct] A status of payment and additional steps for authorization (if needed)
     def process_external_payment(payment_options)
       payment_options[:instance_id] = @instance_id
